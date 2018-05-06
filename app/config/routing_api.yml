@@ -1,0 +1,5 @@
+# /app/config/routing_api.yml
+
+league:
+    type: rest
+    resource: AppBundle\Controller\FootballApiController

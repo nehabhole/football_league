@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Footballteams list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Strip</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for footballTeam in footballTeams %}
+            <tr>
+                <td><a href="{{ path('footballteam_show', { 'id': footballTeam.id }) }}">{{ footballTeam.id }}</a></td>
+                <td>{{ footballTeam.name }}</td>
+                <td>{{ footballTeam.strip }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('footballteam_show', { 'id': footballTeam.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('footballteam_edit', { 'id': footballTeam.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('footballteam_new') }}">Create a new footballTeam</a>
+        </li>
+    </ul>
+{% endblock %}
