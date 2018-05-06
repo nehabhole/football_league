@@ -29,9 +29,10 @@ class FootballTeam
     private $name;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="strip", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FootballLeague", inversedBy="teams")
+     * @ORM\JoinColumn(name="league_id", referencedColumnName="id")
+     *
      */
     private $strip;
 

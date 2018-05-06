@@ -6,6 +6,16 @@ app:
 #    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
 #    prefix: "/doc"
 
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
 api:
     type: rest
     resource: "routing_api.yml"

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * FootballLeague
@@ -28,6 +29,16 @@ class FootballLeague
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="FootballTeam", mappedBy="strip")
+     */
+    private $teams;
+
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id
