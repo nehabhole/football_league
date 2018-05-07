@@ -3,3 +3,7 @@
 league:
     type: rest
     resource: AppBundle\Controller\FootballApiController
+
+team:
+    type: rest
+    resource: AppBundle\Controller\FootballTeamApiController

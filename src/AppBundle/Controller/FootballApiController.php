@@ -19,53 +19,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  *
- * @RouteResource("v1/api")
+ * @RouteResource("api")
  */
 class FootballApiController extends FOSRestController implements ClassResourceInterface
 {
 
     /**
-     * Lists all footballTeam entities.
+     * Lists all football Leagues.
      *
      * @return mixed
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      *
      */
-    public function cgetAction()
+    public function getLeagueAction()
     {
         $em = $this->getDoctrine()->getManager();
         return $em->getRepository('AppBundle:FootballLeague')->findAll();
     }
 
-    /**
-     * @return mixed
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     */
-    public function getAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('AppBundle:FootballTeam')->findBy(['strip' => $id]);
-    }
 
-    public function postAction($id)
+    public function deleteLeagueAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('AppBundle:FootballTeam')->findBy(['strip' => $id]);
-    }
+        $footballLeague = $em->getRepository('AppBundle:FootballLeague')->find($id);
 
-    public function putAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('AppBundle:FootballTeam')->findBy(['strip' => $id]);
-    }
+        if ($footballLeague === null) {
+            return new View(null, Response::HTTP_NOT_FOUND);
+        }
 
-    public function deleteAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        return $em->getRepository('AppBundle:FootballTeam')->findBy(['strip' => $id]);
+        //delete all footteam in the league
+
+        $em->remove($footballLeague);
+        $em->flush();
+
+        return new View(null, Response::HTTP_NO_CONTENT);
     }
 
 
