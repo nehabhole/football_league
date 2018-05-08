@@ -38,10 +38,26 @@ class FootballLeague
      */
     private $teams;
 
+    /**
+     * @return mixed
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    /**
+     * @param mixed $teams
+     */
+    public function setTeams($teams)
+    {
+        $this->teams = $teams;
+    }
+
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     /**

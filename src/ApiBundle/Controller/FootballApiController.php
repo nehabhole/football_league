@@ -112,6 +112,12 @@ class FootballApiController extends FOSRestController
 
         //delete all footteam in the league
 
+        $teams = $footballLeague->getTeams();
+
+        foreach($teams as $team){
+            $em->remove($team);
+        }
+
         $em->remove($footballLeague);
         $em->flush();
 
