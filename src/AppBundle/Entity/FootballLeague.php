@@ -4,12 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * FootballLeague
  *
  * @ORM\Table(name="football_league")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FootballLeagueRepository")
+ * @UniqueEntity("name")
+ *
  */
 class FootballLeague
 {
@@ -24,7 +28,7 @@ class FootballLeague
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
     private $name;
