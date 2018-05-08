@@ -26,23 +26,16 @@ class FootballApiController extends FOSRestController
      *     description="Token created",
      * )
      *
-     *
-     *       @SWG\Parameter(
-     *     name="_username",
-     *     in="formData",
-     *     description="user name",
-     *     required=true,
-     *     type="string",
-     *     @SWG\Schema(type="string")
-     * )
-     *
-     *       @SWG\Parameter(
-     *     name="_password",
-     *     in="formData",
-     *     description="User password",
-     *     required=true,
-     *     type="string",
-     *     @SWG\Schema(type="string")
+     * @SWG\Parameter(
+     *          name="userCredentials",
+     *          in="body",
+     *          description="User data",
+     *          required=true,
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(property="_username", type="string"),
+     *              @SWG\Property(property="_password", type="string")
+     *          )
      * )
      *
      *
@@ -61,6 +54,15 @@ class FootballApiController extends FOSRestController
      *  @SWG\Response(
      *     response=200,
      *     description="All records fetched",
+     * )
+     *
+     *  @SWG\Parameter(
+     *     name="Authorization",
+     *      in="header",
+     *      required=true,
+     *      type="string",
+     *      default="Bearer TOKEN",
+     *      description="Authorization"
      * )
      *
      */
@@ -88,6 +90,15 @@ class FootballApiController extends FOSRestController
      *     description="No Record found",
      * )
      *
+     *
+     * @SWG\Parameter(
+     *     name="Authorization",
+     *      in="header",
+     *      required=true,
+     *      type="string",
+     *      default="Bearer TOKEN",
+     *      description="Authorization"
+     * )
      *
      */
     public function deleteLeagueAction($id)

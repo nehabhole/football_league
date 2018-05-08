@@ -23,6 +23,14 @@ class FootballTeamApiController  extends FOSRestController
      *     description="Football Leagues",
      * )
      *
+     * @SWG\Parameter(
+     *     name="Authorization",
+     *      in="header",
+     *      required=true,
+     *      type="string",
+     *      default="Bearer TOKEN",
+     *      description="Authorization"
+     * )
      * @param $id
      * @return array
      *
@@ -47,21 +55,15 @@ class FootballTeamApiController  extends FOSRestController
      * )
      *
      * @SWG\Parameter(
-     *     name="name",
-     *     in="formData",
-     *     description="Team name",
-     *     required=true,
-     *     type="string",
-     *     @SWG\Schema(type="string")
-     * )
-     *
-     *  @SWG\Parameter(
-     *     name="league_id",
-     *     in="formData",
-     *     description="Team League Id",
-     *     required=true,
-     *     type="integer",
-     *     @SWG\Schema(type="integer")
+     *          name="userCredentials",
+     *          in="body",
+     *          description="User data",
+     *          required=true,
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(property="name", type="string"),
+     *              @SWG\Property(property="strip", type="integer")
+     *          )
      * )
      *
      *
