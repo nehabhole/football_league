@@ -55,9 +55,9 @@ class FootballTeamApiController  extends FOSRestController
      * )
      *
      * @SWG\Parameter(
-     *          name="userCredentials",
+     *          name="Football Team",
      *          in="body",
-     *          description="User data",
+     *          description="Team data",
      *          required=true,
      *          @SWG\Schema(
      *              type="object",
@@ -115,12 +115,15 @@ class FootballTeamApiController  extends FOSRestController
      * )
      *
      * @SWG\Parameter(
-     *     name="name",
-     *     in="formData",
-     *     description="Team name",
-     *     required=true,
-     *     type="string",
-     *     @SWG\Schema(type="string")
+     *          name="Football Team",
+     *          in="body",
+     *          description="Team data",
+     *          required=true,
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(property="name", type="string"),
+     *              @SWG\Property(property="strip", type="integer")
+     *          )
      * )
      *
      *  @SWG\Parameter(
@@ -133,7 +136,7 @@ class FootballTeamApiController  extends FOSRestController
      * )
      *
      */
-    public function patchTeamAction(Request $request,$id)
+    public function putTeamAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
         $footballTeam = $em->getRepository('AppBundle:FootballTeam')->find($id);
@@ -146,7 +149,7 @@ class FootballTeamApiController  extends FOSRestController
             'csrf_protection' => false,
         ]);
 
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all());
 
         if (!$form->isValid()) {
             return $form;
