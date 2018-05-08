@@ -103,6 +103,7 @@ class FootballTeamApiController  extends FOSRestController
      * Modify Football Team
      *
      * @param Request $request
+     * @param int     $id
      * @return View|\Symfony\Component\Form\Form
      *
      * @SWG\Response(
@@ -130,7 +131,7 @@ class FootballTeamApiController  extends FOSRestController
      * )
      *
      */
-    public function putTeamAction($id, Request $request)
+    public function patchTeamAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
         $footballTeam = $em->getRepository('AppBundle:FootballTeam')->find($id);
@@ -143,15 +144,12 @@ class FootballTeamApiController  extends FOSRestController
             'csrf_protection' => false,
         ]);
 
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
             return $form;
         }
-
-        $footballTeam  = $form->getData();
-
-        $em->persist($footballTeam);
+        $em = $this->getDoctrine()->getManager();
         $em->flush();
 
         return new View($footballTeam, Response::HTTP_RESET_CONTENT);
